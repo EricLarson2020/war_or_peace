@@ -87,4 +87,8 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
     winner.deck.cards << @spoils_of_war
     winner.deck.cards = winner.deck.cards.flatten
   end
+
+  def start
+    
+  end
 end
