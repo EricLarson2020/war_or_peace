@@ -102,44 +102,36 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
     input = gets.chomp.upcase
     if input == "GO"
       p "The game has started!"
-count= 0
-      # until player1.has_lost? == true || player2.has_lost? == true
+      count= 0
       loop do
         count += 1
-
-        # if  player1.has_lost? == true || player2.has_lost? == true
-        #   break
-
-
-
         pile_cards
-              if  player1.has_lost? == true || player2.has_lost? == true
-                break
+          if  player1.has_lost? == true || player2.has_lost? == true || count == 1000000
+            break
 
-              else
-        winner
-        award_spoils(winner)
+          else
+            winner
+            award_spoils(winner)
 
-
-if @spoils_of_war.length == 2
-        p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
-elsif @spoils_of_war.length == 6
-        p "Turn #{count}: WAR - #{winner.name} won #{@spoils_of_war.length} cards"
-else @spoils_of_war.length == 0
-        p "Turn #{count}: *mutually assured destruction* #{@spoils_of_war.length}cards removed from"
-        p "play"
-      end
+            if @spoils_of_war.length == 2
+              p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
+            elsif @spoils_of_war.length == 6
+              p "Turn #{count}: WAR - #{winner.name} won #{@spoils_of_war.length} cards"
+            else @spoils_of_war.length == 0
+              p "Turn #{count}: *mutually assured destruction* #{@spoils_of_war.length}cards removed from"
+              p "play"
+            end
 
         @spoils_of_war.clear
-      # if  player1.has_lost? == true || player2.has_lost? == true
-      #   break
+        end
       end
     end
-   end
    if player1.deck.cards.length == 0
      p "*~*~*~* #{player2.name} has won the game! *~*~*~*"
    elsif player2.deck.cards.length == 0
      p "*~*~*~* #{player1.name} has won the game! *~*~*~*"
+   else
+     p "---- DRAW ----"
    end
  end
 end
