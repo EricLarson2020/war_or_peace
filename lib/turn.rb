@@ -89,6 +89,7 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
   def award_spoils(winner)
     winner.deck.cards << @spoils_of_war
     winner.deck.cards = winner.deck.cards.flatten
+
   end
 
   def start
@@ -101,13 +102,22 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
     input = gets.chomp.upcase
     if input == "GO"
       p "The game has started!"
-
+count= 0
       # until player1.has_lost? == true || player2.has_lost? == true
       loop do
+        count += 1
         pile_cards
         winner
         award_spoils(winner)
-        p "#{winner.name} has won"
+if type == :basic
+        p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
+elsif type == :war
+        p "Turn #{count}: WAR - #{winner.name} won #{@spoils_of_war.length} cards"
+else type == :mutually_assured_destruction
+        p "Turn #{count}: *mutually assured destruction* #{@spoils_of_war.length}cards removed from"
+        p "play"
+      end
+        @spoils_of_war.clear
       if  player1.has_lost? == true || player2.has_lost? == true
         break
       end
@@ -115,3 +125,17 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
    end
  end
 end
+# @rank=3, @suit=:spades, @value="3"
+# @rank=12, @suit=:clubs, @value="Queen" -player2
+
+#player 1 (spoils of war appended to bottom of player1 array)
+#1: rank=6, @suit=:spades, @value="6"
+#2: @rank=13, @suit=:clubs, @value="King"
+#-1:@rank=11, @suit=:clubs, @value="Jack"
+#-2:rank=8, @suit=:clubs, @value="8"
+
+#player 2
+#1:@rank=2, @suit=:spades, @value="2"
+#2:@rank=4, @suit=:spades, @value="4"
+#-1:@rank=10, @suit=:clubs, @value="10"
+#-2:@rank=9, @suit=:clubs, @value="9"
