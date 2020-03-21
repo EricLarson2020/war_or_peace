@@ -136,7 +136,11 @@ else @spoils_of_war.length == 0
       end
     end
    end
-   
+   if player1.deck.cards.length == 0
+     p "*~*~*~* #{player2.name} has won the game! *~*~*~*"
+   elsif player2.deck.cards.length == 0
+     p "*~*~*~* #{player1.name} has won the game! *~*~*~*"
+   end
  end
 end
 # @rank=3, @suit=:spades, @value="3"
