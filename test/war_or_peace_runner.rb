@@ -2,6 +2,7 @@ require './lib/card.rb'
 require './lib/deck.rb'
 require './lib/player.rb'
 require './lib/turn.rb'
+require './lib/game.rb'
 
 card1 = Card.new(:spades, '1', 1)
 card2 = Card.new(:spades, '2', 2)
@@ -67,3 +68,7 @@ card51])
 
 player1 = Player.new("Megan", deck1)
 player2 = Player.new("Auora", deck2)
+
+turn = Turn.new(player1, player2)
+
+turn.start
