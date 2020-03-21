@@ -6,7 +6,7 @@ class Player
   end
 
   def has_lost?
-    if deck.cards == []
+    if deck.cards.length == 0
       true
     else
       false

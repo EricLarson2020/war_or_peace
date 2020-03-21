@@ -1,4 +1,7 @@
 require './lib/deck'
+require './lib/card'
+require './lib/player'
+
 class Turn
 attr_accessor :player1, :player2, :spoils_of_war, :turn
   def initialize(player1, player2)
@@ -23,14 +26,6 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
   def winner
 
 
-    # if player1.deck.rank_of_card_at(0) != player2.deck.rank_of_card_at(0)
-    #   turn = :basic
-    #
-    # elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
-    #   player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
-    #   turn = :mutually_assured_destruction
-    # else turn = :war
-    # end
 
     if type == :basic &&
 
@@ -52,27 +47,27 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
 
   def pile_cards
 
-    if player1.deck.rank_of_card_at(0) != player2.deck.rank_of_card_at(0)
-      turn = :basic
-    elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
-      player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
-      turn = :mutually_assured_destruction
-    else turn = :war
-    end
+    # if player1.deck.rank_of_card_at(0) != player2.deck.rank_of_card_at(0)
+    #   turn = :basic
+    # elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
+    #   player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
+    #   turn = :mutually_assured_destruction
+    # else turn = :war
+    # end
 
-    if turn == :basic
+    if type == :basic
       @spoils_of_war << player1.deck.remove_card
-      @spoils_of_war << player2.deck.remove_card
-
-    elsif turn == :war
-      @spoils_of_war << player1.deck.remove_card
-      @spoils_of_war << player1.deck.remove_card
-      @spoils_of_war << player1.deck.remove_card
-      @spoils_of_war << player2.deck.remove_card
-      @spoils_of_war << player2.deck.remove_card
       @spoils_of_war << player2.deck.remove_card
 
-    elsif turn == :mutually_assured_destruction
+    elsif type == :war
+      @spoils_of_war << player1.deck.remove_card
+      @spoils_of_war << player1.deck.remove_card
+      @spoils_of_war << player1.deck.remove_card
+      @spoils_of_war << player2.deck.remove_card
+      @spoils_of_war << player2.deck.remove_card
+      @spoils_of_war << player2.deck.remove_card
+
+    elsif type == :mutually_assured_destruction
       player1.deck.remove_card
       player1.deck.remove_card
       player1.deck.remove_card
@@ -84,7 +79,62 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
 
 
   def award_spoils(winner)
+if winner == player1 || winner == player2
     winner.deck.cards << @spoils_of_war
     winner.deck.cards = winner.deck.cards.flatten
+  else
+    p "No spoils to award"
   end
+end
+
+
+  def start
+
+    p "Welcome to War! (or Peace) This game will be played with 52 cards."
+    p "The players today are #{player1.name} and #{player2.name}"
+    p "Type 'GO' to start the game!"
+    p "------------------------------------------------------------------"
+
+    input = gets.chomp.upcase
+    if input == "GO"
+      p "The game has started!"
+      count= 0
+      loop do
+        count += 1
+        winner
+
+        pile_cards
+
+
+
+          if  player1.has_lost? == true || player2.has_lost? == true || count == 1000000
+            break
+
+          else
+
+            award_spoils(winner)
+
+            if @spoils_of_war.length == 2 && type == :basic
+              p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
+
+            elsif @spoils_of_war.length == 6
+              p "Turn #{count}: WAR - #{winner.name} won #{@spoils_of_war.length} cards"
+            else
+              p "Turn #{count}: *mutually assured destruction* #{@spoils_of_war.length} cards removed from"
+              p "play"
+            end
+
+        @spoils_of_war.clear
+
+        end
+      end
+    end
+   if player1.deck.cards.length == 0
+     p "*~*~*~* #{player2.name} has won the game! *~*~*~*"
+   elsif player2.deck.cards.length == 0
+     p "*~*~*~* #{player1.name} has won the game! *~*~*~*"
+   else
+     p "---- DRAW ----"
+   end
+ end
 end

@@ -1,7 +1,8 @@
-require './lib/card.rb'
-require './lib/deck.rb'
-require './lib/player.rb'
-require './lib/turn.rb'
+require './lib/card'
+require './lib/deck'
+require './lib/player'
+require './lib/turn'
+
 
 card1 = Card.new(:spades, '1', 1)
 card2 = Card.new(:spades, '2', 2)
@@ -56,11 +57,18 @@ card50 = Card.new(:clubs, 'Jack', 11)
 card51 = Card.new(:clubs, 'Queen', 12)
 card52 = Card.new(:clubs, 'King', 13)
 
-deck1 = Deck.new([card1, card3, card6, card8, card10, card13,
-card14, card17, card20, card23, card24, card25, card28,
-card30, card32, card34, card35, card36, card38, card39, card41, card43,
-card45, card47, card50, card52])
-deck2 = Deck.new([card2, card4, card5, card7, card9, card11, card12,
-card15, card16, card18, card19, card21, card22, card26, card27,
-card29, card31, card33, card37, card40, card44, card46, card48, card49,
+deck1 = Deck.new([card52, card1, card28, card41, card10, card17,
+card6, card13, card20, card36, card38, card25, card8,
+card30, card32, card34, card35, card23, card24, card39, card14, card43,
+card45, card47, card50, card3])
+deck2 = Deck.new([card37, card27, card7, card2, card9, card12, card11, card12,
+card15, card16, card18, card19, card21, card22, card26, card40,
+card29, card31, card33, card5, card4, card44, card46, card48, card49,
 card51])
+
+player1 = Player.new("Megan", deck1)
+player2 = Player.new("Auora", deck2)
+
+turn = Turn.new(player1, player2)
+
+turn.start

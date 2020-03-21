@@ -38,7 +38,7 @@ class PlayerTest < Minitest::Test
     assert_equal deck, player.deck
 end
 
-  def test_remove_card_from_deck
+  def test_has_lost?
     card1 = Card.new(:diamond, 'Queen', 12)
     card2 = Card.new(:spade, '3', 3)
     card3 = Card.new(:heart, 'Ace', 14)
