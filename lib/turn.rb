@@ -106,23 +106,37 @@ count= 0
       # until player1.has_lost? == true || player2.has_lost? == true
       loop do
         count += 1
+
+        # if  player1.has_lost? == true || player2.has_lost? == true
+        #   break
+
+
+
         pile_cards
+              if  player1.has_lost? == true || player2.has_lost? == true
+                break
+
+              else
         winner
         award_spoils(winner)
-if type == :basic
+
+
+if @spoils_of_war.length == 2
         p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
-elsif type == :war
+elsif @spoils_of_war.length == 6
         p "Turn #{count}: WAR - #{winner.name} won #{@spoils_of_war.length} cards"
-else type == :mutually_assured_destruction
+else @spoils_of_war.length == 0
         p "Turn #{count}: *mutually assured destruction* #{@spoils_of_war.length}cards removed from"
         p "play"
       end
+
         @spoils_of_war.clear
-      if  player1.has_lost? == true || player2.has_lost? == true
-        break
+      # if  player1.has_lost? == true || player2.has_lost? == true
+      #   break
       end
     end
    end
+   
  end
 end
 # @rank=3, @suit=:spades, @value="3"

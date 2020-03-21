@@ -57,13 +57,13 @@ card50 = Card.new(:clubs, 'Jack', 11)
 card51 = Card.new(:clubs, 'Queen', 12)
 card52 = Card.new(:clubs, 'King', 13)
 
-deck1 = Deck.new([card6, card52, card1, card28, card10, card17,
-card14, card13, card20, card36, card24, card25, card8,
+deck1 = Deck.new([card14, card52, card1, card28, card10, card17,
+card6, card13, card20, card36, card24, card25, card8,
 card30, card32, card34, card35, card23, card38, card39, card41, card43,
 card45, card47, card50, card3])
-deck2 = Deck.new([card2, card4, card5, card7, card9, card12, card11, card12,
+deck2 = Deck.new([card40, card4, card5, card7, card9, card12, card11, card12,
 card15, card16, card18, card19, card21, card22, card26, card27,
-card29, card31, card33, card37, card40, card44, card46, card48, card49,
+card29, card31, card33, card37, card2, card44, card46, card48, card49,
 card51])
 
 player1 = Player.new("Megan", deck1)
