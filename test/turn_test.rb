@@ -172,7 +172,7 @@ end
     player2 = Player.new("Aurora", deck2)
     turn = Turn.new(player1, player2)
     turn.pile_cards
-    assert_equal [card8, card7], turn.spoils_of_war
+    assert_equal [card1, card3], turn.spoils_of_war
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -187,7 +187,7 @@ end
     player2 = Player.new("Auora", deck4)
     turn = Turn.new(player1, player2)
     turn.pile_cards
-    assert_equal [card8, card5, card2, card7, card6, card3], turn.spoils_of_war
+    assert_equal [card1, card2, card5, card4, card3, card6], turn.spoils_of_war
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -202,8 +202,8 @@ end
     player2 = Player.new("Aurora", deck6)
     turn = Turn.new(player1, player2)
     turn.pile_cards
-    assert_equal [card1], player1.deck.cards
-    assert_equal [card4], player2.deck.cards
+    assert_equal [card8], player1.deck.cards
+    assert_equal [card7], player2.deck.cards
 
 end
 
@@ -222,10 +222,10 @@ def test_if_spoils_of_war_awarded_to_winner
   player1 = Player.new("Megan", deck1)
   player2 = Player.new("Aurora", deck2)
   turn = Turn.new(player1, player2)
-  turn.pile_cards
   winner = turn.winner
+  turn.pile_cards
   turn.award_spoils(winner)
-  assert_equal [card1, card2, card5, card8, card7], player1.deck.cards
-  assert_equal [card3, card4, card6], player2.deck.cards
+  assert_equal [card2, card5, card8, card1, card3], player1.deck.cards
+  assert_equal [card4, card6, card7], player2.deck.cards
 end
 end
