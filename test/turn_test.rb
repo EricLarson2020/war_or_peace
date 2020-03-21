@@ -221,9 +221,9 @@ def test_if_spoils_of_war_awarded_to_winner
   deck2 = Deck.new([card3, card4, card6, card7])
   player1 = Player.new("Megan", deck1)
   player2 = Player.new("Aurora", deck2)
-  turn = Turn.new(player1, player2)
-  winner = turn.winner
+  turn = Turn.new(player1, player2)=
   turn.pile_cards
+  winner = turn.winner
   turn.award_spoils(winner)
   assert_equal [card1, card2, card5, card8, card7], player1.deck.cards
   assert_equal [card3, card4, card6], player2.deck.cards

@@ -1,8 +1,8 @@
-require './lib/card.rb'
-require './lib/deck.rb'
-require './lib/player.rb'
-require './lib/turn.rb'
-require './lib/game.rb'
+require './lib/card'
+require './lib/deck'
+require './lib/player'
+require './lib/turn'
+
 
 card1 = Card.new(:spades, '1', 1)
 card2 = Card.new(:spades, '2', 2)

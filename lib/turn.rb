@@ -1,4 +1,7 @@
 require './lib/deck'
+require './lib/card'
+require './lib/player'
+
 class Turn
 attr_accessor :player1, :player2, :spoils_of_war, :turn
   def initialize(player1, player2)
@@ -89,6 +92,26 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
   end
 
   def start
-    
-  end
+
+    p "Welcome to War! (or Peace) This game will be played with 52 cards."
+    p "The players today are #{player1.name} and #{player2.name}"
+    p "Type 'GO' to start the game!"
+    p "------------------------------------------------------------------"
+
+    input = gets.chomp.upcase
+    if input == "GO"
+      p "The game has started!"
+
+      # until player1.has_lost? == true || player2.has_lost? == true
+      loop do
+        pile_cards
+        winner
+        award_spoils(winner)
+        p "#{winner.name} has won"
+      if  player1.has_lost? == true || player2.has_lost? == true
+        break
+      end
+    end
+   end
+ end
 end
