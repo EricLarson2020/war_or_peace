@@ -133,7 +133,7 @@ end
         end
       end
     end
-   if player1.deck.cards.length == 0
+   if player1.deck.cards.length == 0 
      p "*~*~*~* #{player2.name} has won the game! *~*~*~*"
    elsif player2.deck.cards.length == 0
      p "*~*~*~* #{player1.name} has won the game! *~*~*~*"
