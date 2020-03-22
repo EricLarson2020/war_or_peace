@@ -26,9 +26,7 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
   def winner
 
 
-
     if type == :basic &&
-
       player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
       player1
     elsif type == :basic &&
@@ -89,40 +87,30 @@ end
 
 
   def start
-
     p "Welcome to War! (or Peace) This game will be played with 52 cards."
     p "The players today are #{player1.name} and #{player2.name}"
     p "Type 'GO' to start the game!"
     p "------------------------------------------------------------------"
-
     input = gets.chomp.upcase
     if input == "GO"
       p "The game has started!"
       count= 0
       loop do
         count += 1
-
         winner
-
         pile_cards
-
-          if  player1.has_lost? == true || player2.has_lost? == true || count == 1000000
+        award_spoils(winner)
+        @spoils_of_war.clear
+          until  player1.has_lost? == true || player2.has_lost? == true || count == 1000000
             break
-
-          else
-            award_spoils(winner)
-            if @spoils_of_war.length == 2 && type == :basic
-              p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
-
-            elsif @spoils_of_war.length == 6
-              p "Turn #{count}: WAR - #{winner.name} won #{@spoils_of_war.length} cards"
+            if type == :basic
+              p "Turn #{count}: #{winner.name} won 2 cards"
+            elsif type == :war
+              p "Turn #{count}: WAR - #{winner.name} won 6 cards"
             else
-              p "Turn #{count}: *mutually assured destruction* #{@spoils_of_war.length} cards removed from"
+              p "Turn #{count}: *mutually assured destruction* 6 cards removed from"
               p "play"
             end
-
-        @spoils_of_war.clear
-
         end
       end
     end
