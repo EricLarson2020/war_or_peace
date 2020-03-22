@@ -112,12 +112,12 @@ end
           else
             award_spoils(winner)
             if @spoils_of_war.length == 2 && type == :basic
-              p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
+              p "Turn #{count}: #{winner.name} won 2 cards"
 
             elsif @spoils_of_war.length == 6
-              p "Turn #{count}: WAR - #{winner.name} won #{@spoils_of_war.length} cards"
+              p "Turn #{count}: WAR - #{winner.name} won 6 cards"
             else
-              p "Turn #{count}: *mutually assured destruction* #{@spoils_of_war.length} cards removed from"
+              p "Turn #{count}: *mutually assured destruction* 6 cards removed from"
               p "play"
             end
 
