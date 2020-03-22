@@ -14,6 +14,8 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
     if
       player1.deck.rank_of_card_at(0)!= player2.deck.rank_of_card_at(0)
       turn = :basic
+    elsif player1.deck.rank_of_card_at(2) == nil || player2.deck.rank_of_card_at(2) == nil
+      turn = :war
     elsif
       player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
       player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
@@ -25,15 +27,19 @@ attr_accessor :player1, :player2, :spoils_of_war, :turn
 
   def winner
 
+if player1.deck.rank_of_card_at(2) == nil
+winner =  player2
 
+elsif player2.deck.rank_of_card_at(2) == nil
+winner = player1
 
-    if type == :basic &&
-
+  elsif type == :basic &&
       player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
       player1
     elsif type == :basic &&
       player2.deck.rank_of_card_at(0) > player1.deck.rank_of_card_at(0)
       player2
+
     elsif type == :war &&
       player1.deck.rank_of_card_at(2) > player2.deck.rank_of_card_at(2)
       player1
@@ -101,26 +107,24 @@ end
       count= 0
       loop do
         count += 1
+        # require "pry";binding.pry if count > 273
         winner
-
+        # require "pry";binding.pry if count > 273
         pile_cards
-
-
+        # require "pry";binding.pry if count > 273
 
           if  player1.has_lost? == true || player2.has_lost? == true || count == 1000000
             break
 
           else
-
             award_spoils(winner)
-
             if @spoils_of_war.length == 2 && type == :basic
-              p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
+              p "Turn #{count}: #{winner.name} won 2 cards"
 
-            elsif @spoils_of_war.length == 6
-              p "Turn #{count}: WAR - #{winner.name} won #{@spoils_of_war.length} cards"
+            elsif @spoils_of_war.length == 6 && winner != "No Winner"
+              p "Turn #{count}: WAR - #{winner.name} won 6 cards"
             else
-              p "Turn #{count}: *mutually assured destruction* #{@spoils_of_war.length} cards removed from"
+              p "Turn #{count}: *mutually assured destruction* 6 cards removed from"
               p "play"
             end
 
@@ -129,7 +133,7 @@ end
         end
       end
     end
-   if player1.deck.cards.length == 0
+   if player1.deck.cards.length == 0 
      p "*~*~*~* #{player2.name} has won the game! *~*~*~*"
    elsif player2.deck.cards.length == 0
      p "*~*~*~* #{player1.name} has won the game! *~*~*~*"

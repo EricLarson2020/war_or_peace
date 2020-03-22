@@ -83,4 +83,12 @@ end
         deck.add_card(card4)
         assert_equal [card1, card2, card3, card4], deck.cards
       end
+
+      def test_rank_of_cards_with_index_2_for_deck_with_two_cards
+        card1 = Card.new(:diamond, '3', 3)
+        card2 = Card.new(:diamond, '2', 2)
+        cards = [card1, card2]
+        deck= Deck.new(cards)
+        assert_equal nil, deck.rank_of_card_at(2)
+    end
 end
