@@ -101,19 +101,16 @@ end
       count= 0
       loop do
         count += 1
+
         winner
 
         pile_cards
-
-
 
           if  player1.has_lost? == true || player2.has_lost? == true || count == 1000000
             break
 
           else
-
             award_spoils(winner)
-
             if @spoils_of_war.length == 2 && type == :basic
               p "Turn #{count}: #{winner.name} won #{@spoils_of_war.length} cards"
 
