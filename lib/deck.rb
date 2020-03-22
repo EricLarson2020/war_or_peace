@@ -8,7 +8,11 @@ class Deck
 
 #index returns the first object in an array such that
   def rank_of_card_at(index)
+    if cards.length < 3 && index == 2
+      return nil
+    else
     cards[index].rank
+  end
   end
 
 
