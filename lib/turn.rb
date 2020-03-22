@@ -107,10 +107,11 @@ end
       count= 0
       loop do
         count += 1
-
+        # require "pry";binding.pry if count > 273
         winner
+        # require "pry";binding.pry if count > 273
         pile_cards
-
+        # require "pry";binding.pry if count > 273
 
           if  player1.has_lost? == true || player2.has_lost? == true || count == 1000000
             break
@@ -120,7 +121,7 @@ end
             if @spoils_of_war.length == 2 && type == :basic
               p "Turn #{count}: #{winner.name} won 2 cards"
 
-            elsif @spoils_of_war.length == 6
+            elsif @spoils_of_war.length == 6 && winner != "No Winner"
               p "Turn #{count}: WAR - #{winner.name} won 6 cards"
             else
               p "Turn #{count}: *mutually assured destruction* 6 cards removed from"
